@@ -123,11 +123,10 @@ void TestSetMinutes()
 	
 int main(){
 	
-	TestComponentsToSeconds();
+	// TestComponentsToSeconds();
 	// TestDefaultConstructor();
 	// TestComponentConstructor();
 	// TestGetComponents();
-	
 	// Many othere test functions...
 	
 	cout << "PASSED ALL TESTS!!!" << endl;

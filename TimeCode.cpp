@@ -15,12 +15,15 @@ using namespace std;
         t = TimeCode::ComponentsToSeconds(hr,min,sec); 
    }; 
 
-    //copy consturcotr: 
-    /*
-    Implement here: 
-    */
-    
 
+    TimeCode::TimeCode(const TimeCode& tc){
+        t = tc.t; // copies the t value from the tc adress ans assignes it to the new object
+    }; 
+
+    TimeCode::~TimeCode(){
+       // what shoudl I put here?
+    }; 
+    
 
     // set functions 
     void TimeCode::SetHours(unsigned int hours){
@@ -41,7 +44,8 @@ using namespace std;
     }; 
 
     unsigned int TimeCode::GetMinutes() const{
-        return (  (t-(GetHours()*3600)) / 60   );
+        // return (  (t-(GetHours()*3600)) / 60   );
+        return ((t/60)%60);
           // subcract the hours worth of seconds from t, then use integer division to get the minutes 
     };
 
@@ -77,40 +81,40 @@ using namespace std;
         total_seconds += this->GetTimeCodeAsSeconds();
 
         unsigned int hours = total_seconds / 3600; 
-        unsigned int mins = (total_seconds - (3600 * hours)/ 60);
+        unsigned int mins = ((total_seconds /60) % 60);
         unsigned int secs = total_seconds % 60;
         return TimeCode(hours,mins,secs); 
     }; 
     //NOTE TO SELF: what happens if they substract a time so that it goes negative? Throw an excpetion?
-    TimeCode TimeCode::operator-(const TimeCode& other) const{ 
-        unsigned int total_seconds = TimeCode::ComponentsToSeconds(other.GetHours(),other.GetMinutes(),other.GetSeconds());
+    TimeCode TimeCode::operator-(const TimeCode& other) const{  //NOTE: Object on the right of the '-' sign will be passed as the argument, 
 
-        if(total_seconds < this->GetTimeCodeAsSeconds()){ //checks to make sure will not go negative, throws excpetions otherwise 
-            throw runtime_error("You cannot substract a larger time from a smaller time! You cannot have a negative time!");
+        if(other.GetTimeCodeAsSeconds() > this->GetTimeCodeAsSeconds()){ //checks to make sure will not go negative, throws excpetions otherwise 
+            throw runtime_error("---You cannot substract a larger time from a smaller time! You cannot have a negative time!---");
+        }else{
+
+        unsigned int total_seconds = this->GetTimeCodeAsSeconds() - other.GetTimeCodeAsSeconds();
+        unsigned int hours = total_seconds / 3600; 
+        unsigned int mins = ((total_seconds /60) % 60);
+        unsigned int secs = total_seconds % 60;
+        return TimeCode(hours,mins,secs);
         }
-
-        total_seconds -= this->GetTimeCodeAsSeconds();
-        unsigned int hours = total_seconds % 3600; 
-        unsigned int mins = (total_seconds - (60 * hours)/ 60);
-        unsigned int secs = (total_seconds - (3600*hours - (60 * mins)));
-        return TimeCode(hours,mins,secs); 
     }; 
 
     TimeCode TimeCode::operator*(double a) const{ 
         unsigned int total_seconds = this->GetTimeCodeAsSeconds(); 
         total_seconds *= a; 
-        unsigned int hours = total_seconds % 3600; 
-        unsigned int mins = (total_seconds - (60 * hours)/ 60);
-        unsigned int secs = (total_seconds - (3600*hours - (60 * mins)));
+         unsigned int hours = total_seconds / 3600; 
+        unsigned int mins = ((total_seconds /60) % 60);
+        unsigned int secs = total_seconds % 60;
         return TimeCode(hours,mins,secs);
         }
 
     TimeCode TimeCode::operator/(double a) const{ 
         unsigned int total_seconds = this->GetTimeCodeAsSeconds(); 
         total_seconds /= a; 
-        unsigned int hours = total_seconds % 3600; 
-        unsigned int mins = (total_seconds - (60 * hours)/ 60);
-        unsigned int secs = (total_seconds - (3600*hours - (60 * mins)));
+        unsigned int hours = total_seconds / 3600; 
+        unsigned int mins = ((total_seconds /60) % 60);
+        unsigned int secs = total_seconds % 60;
         return TimeCode(hours,mins,secs);
         }
    
@@ -154,15 +158,35 @@ using namespace std;
 
 int main(){
 
-    TimeCode time; 
-    time = TimeCode(12,35,30);
-    TimeCode temp = TimeCode(1,1,1);
-    
-    TimeCode x = time.operator+(temp);
 
-    cout << time.ToString() << endl << endl;
-    cout << x.ToString();
+    // TimeCode time; 
+    // time = TimeCode(12,35,30);
+    // TimeCode temp = TimeCode(1,1,1);
+    
+    // TimeCode x = time.operator+(temp);
+    // TimeCode x = time - temp;
+    // TimeCode x = temp - time; 
+
+    TimeCode time = TimeCode(2,4,2); 
+    TimeCode temp = TimeCode(999999,1,1);
+    TimeCode x = time /2;
+
+    // cout << time.ToString() << endl << endl;
+    // cout << x.ToString();
+    cout<< true; 
+
+    if(time > temp){
+        cout << "time is bigger";
+    }else if(temp > time){
+        cout << "temp is bigger";
+    }
+
+
+
+
 
     return 0; 
 }
+
+
 
