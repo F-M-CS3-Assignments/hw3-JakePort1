@@ -8,11 +8,13 @@ using namespace std;
 #include "TimeCode.h"
 
     // constructor sets time as 0
+    TimeCode::TimeCode(unsigned int T){ //operator for if I just want to input the raw time in seconds score 
+        t = T;
+    };
+
     TimeCode::TimeCode(unsigned int hr, unsigned int min, unsigned long long int sec){
-        /*
-        Insert overflow fixes here: 
-        */
-        t = TimeCode::ComponentsToSeconds(hr,min,sec); 
+      
+        t = TimeCode::ComponentsToSeconds(hr,min,sec); //this account for overflow by converting everything to seconds 
    }; 
 
 
@@ -20,12 +22,31 @@ using namespace std;
         t = tc.t; // copies the t value from the tc adress ans assignes it to the new object
     }; 
 
-    TimeCode::~TimeCode(){
-       // what shoudl I put here?
-    }; 
-    
+    // TimeCode::~TimeCode(){
+    //    // what shoudl I put here?
+    // }; 
 
     // set functions 
+    //INSERT OVERFLOW FIX FOR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // FOR THESE ONES: create a new temp one and set it to be the hours mins and such so that it ocnverst thouse into seconds, the changes the adress to be directed to that new one 
+    //I will also need to implement a get components thigns and replace all the code that I have done so far to make it simplere 
     void TimeCode::SetHours(unsigned int hours){
         t = ComponentsToSeconds(hours,GetMinutes(),GetSeconds());  
     }; 
@@ -63,12 +84,13 @@ using namespace std;
         return sec + (60 * min) + (3600 * hr); //just adds everythning together 
     };
 
-    // void TimeCode::GetComponents(unsigned int& hr, unsigned int& min, unsigned int& sec) { //was having issues with "const", check this again later 
-    //     /*
-    //     Not yet sure how this is supposed to work lol 
-    //     */
-    // }; 
-
+    void TimeCode::GetComponents(unsigned int& hr, unsigned int& min, unsigned int& sec) const {
+        // sets the adress to the inputted vars to be the proper nums
+        hr = GetHours();
+        min = GetMinutes();
+        sec = GetSeconds();
+        } 
+   
 
     string TimeCode::ToString() const{
         return to_string(GetHours()) + ":" + to_string(GetMinutes()) + ":" + to_string(GetSeconds()); //converst numbers to a string
@@ -80,9 +102,11 @@ using namespace std;
         unsigned int total_seconds = TimeCode::ComponentsToSeconds(other.GetHours(),other.GetMinutes(),other.GetSeconds());
         total_seconds += this->GetTimeCodeAsSeconds();
 
+        //CANNOT use GetComponents for this because I only have the raw time (t) of the answer, its not yet in object form. 
         unsigned int hours = total_seconds / 3600; 
         unsigned int mins = ((total_seconds /60) % 60);
         unsigned int secs = total_seconds % 60;
+
         return TimeCode(hours,mins,secs); 
     }; 
     //NOTE TO SELF: what happens if they substract a time so that it goes negative? Throw an excpetion?
@@ -173,17 +197,18 @@ int main(){
 
     // cout << time.ToString() << endl << endl;
     // cout << x.ToString();
-    cout<< true; 
+    // cout<< true; 
 
-    if(time > temp){
-        cout << "time is bigger";
-    }else if(temp > time){
-        cout << "temp is bigger";
-    }
+    // if(time > temp){
+    //     cout << "time is bigger";
+    // }else if(temp > time){
+    //     cout << "temp is bigger";
+    // }
 
-
-
-
+    TimeCode TC = TimeCode(0,0,61);
+    cout << TC.ToString() << endl;
+    TC.setSeconds(62);
+    cout << TC.ToString() << endl;
 
     return 0; 
 }
