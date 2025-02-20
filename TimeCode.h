@@ -27,6 +27,9 @@ class TimeCode{
         unsigned int GetSeconds() const; 
 
         long long unsigned int GetTimeCodeAsSeconds() const {return t;}; 
+        // long long unsigned int GetTimeCodeAsSeconds() const;// {return t;}; 
+
+
         void GetComponents(unsigned int& hr, unsigned int& min, unsigned int& sec) const; 
         static long long unsigned int ComponentsToSeconds(unsigned int hr, unsigned int min, unsigned int sec); 
 
