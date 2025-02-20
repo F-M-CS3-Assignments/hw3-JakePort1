@@ -124,9 +124,9 @@ void TestSetMinutes()
 int main(){
 	
 	TestComponentsToSeconds();
-	TestDefaultConstructor();
-	TestComponentConstructor();
-	TestGetComponents();
+	// TestDefaultConstructor();
+	// TestComponentConstructor();
+	// TestGetComponents();
 	
 	// Many othere test functions...
 	

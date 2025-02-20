@@ -41,11 +41,12 @@ using namespace std;
     }; 
 
     unsigned int TimeCode::GetMinutes() const{
-        return ((t - (60 * GetHours())/ 60));  // subcract the hours worth of seconds from t, then use integer division to get the minutes 
+        return (  (t-(GetHours()*3600)) / 60   );
+          // subcract the hours worth of seconds from t, then use integer division to get the minutes 
     };
 
     unsigned int TimeCode::GetSeconds() const{
-        return (t - (3600*GetHours() - (60 * GetMinutes()))); // whatever is left after subtracting out the seconds of the hours and minutes
+        return t % 60; // whatever is left after subtracting out the seconds of the hours and minutes
     };
 
     // long long unsigned int TimeCode::GetTimeCodeAsSeconds() const{
@@ -74,9 +75,10 @@ using namespace std;
     TimeCode TimeCode::operator+(const TimeCode& other) const{ 
         unsigned int total_seconds = TimeCode::ComponentsToSeconds(other.GetHours(),other.GetMinutes(),other.GetSeconds());
         total_seconds += this->GetTimeCodeAsSeconds();
-        unsigned int hours = total_seconds % 3600; 
-        unsigned int mins = (total_seconds - (60 * hours)/ 60);
-        unsigned int secs = (total_seconds - (3600*hours - (60 * mins)));
+
+        unsigned int hours = total_seconds / 3600; 
+        unsigned int mins = (total_seconds - (3600 * hours)/ 60);
+        unsigned int secs = total_seconds % 60;
         return TimeCode(hours,mins,secs); 
     }; 
     //NOTE TO SELF: what happens if they substract a time so that it goes negative? Throw an excpetion?
@@ -154,8 +156,12 @@ int main(){
 
     TimeCode time; 
     time = TimeCode(12,35,30);
+    TimeCode temp = TimeCode(1,1,1);
+    
+    TimeCode x = time.operator+(temp);
 
-    cout << time.ToString();
+    cout << time.ToString() << endl << endl;
+    cout << x.ToString();
 
     return 0; 
 }
