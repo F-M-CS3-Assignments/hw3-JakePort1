@@ -16,8 +16,11 @@ using namespace std;
    }; 
 
     //copy consturcotr: 
+    /*
+    Implement here: 
+    */
+    
 
-    // Other constuctor: 
 
     // set functions 
     void TimeCode::SetHours(unsigned int hours){
@@ -146,4 +149,14 @@ using namespace std;
         }else {return false;}
      }; 
 
+
+int main(){
+
+    TimeCode time; 
+    time = TimeCode(12,35,30);
+
+    cout << time.ToString();
+
+    return 0; 
+}
 
