@@ -55,7 +55,7 @@ using namespace std;
         t = ComponentsToSeconds(GetHours(),minutes,GetSeconds());
     }; 
 
-    void TimeCode::setSeconds(unsigned int seconds){
+    void TimeCode::SetSeconds(unsigned int seconds){
         t = ComponentsToSeconds(GetHours(),GetMinutes(),seconds);
     }; 
 
@@ -180,38 +180,38 @@ using namespace std;
      }; 
 
 
-int main(){
+// int main(){
 
 
-    // TimeCode time; 
-    // time = TimeCode(12,35,30);
-    // TimeCode temp = TimeCode(1,1,1);
+//     // TimeCode time; 
+//     // time = TimeCode(12,35,30);
+//     // TimeCode temp = TimeCode(1,1,1);
     
-    // TimeCode x = time.operator+(temp);
-    // TimeCode x = time - temp;
-    // TimeCode x = temp - time; 
+//     // TimeCode x = time.operator+(temp);
+//     // TimeCode x = time - temp;
+//     // TimeCode x = temp - time; 
 
-    TimeCode time = TimeCode(2,4,2); 
-    TimeCode temp = TimeCode(999999,1,1);
-    TimeCode x = time /2;
+//     TimeCode time = TimeCode(2,4,2); 
+//     TimeCode temp = TimeCode(999999,1,1);
+//     TimeCode x = time /2;
 
-    // cout << time.ToString() << endl << endl;
-    // cout << x.ToString();
-    // cout<< true; 
+//     // cout << time.ToString() << endl << endl;
+//     // cout << x.ToString();
+//     // cout<< true; 
 
-    // if(time > temp){
-    //     cout << "time is bigger";
-    // }else if(temp > time){
-    //     cout << "temp is bigger";
-    // }
+//     // if(time > temp){
+//     //     cout << "time is bigger";
+//     // }else if(temp > time){
+//     //     cout << "temp is bigger";
+//     // }
 
-    TimeCode TC = TimeCode(0,0,61);
-    cout << TC.ToString() << endl;
-    TC.setSeconds(62);
-    cout << TC.ToString() << endl;
+//     TimeCode TC = TimeCode(0,0,61);
+//     cout << TC.ToString() << endl;
+//     TC.SetSeconds(62);
+//     cout << TC.ToString() << endl;
 
-    return 0; 
-}
+//     return 0; 
+// }
 
 
 

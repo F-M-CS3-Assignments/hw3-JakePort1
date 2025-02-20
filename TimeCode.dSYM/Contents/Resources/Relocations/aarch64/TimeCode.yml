@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/jacobport/Desktop/CPS 222/Homeworks /hw3-JakePort1/TimeCode'
+relocations:     []
+...

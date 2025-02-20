@@ -12,13 +12,14 @@ using namespace std;
 class TimeCode{ 
 
     public: 
+        TimeCode(unsigned int T);
         TimeCode(unsigned int hr = 0, unsigned int min = 0, unsigned long long int sec = 0); 
         TimeCode(const TimeCode& tc); 
         ~TimeCode(){}; 
 
         void SetHours(unsigned int hours); 
         void SetMinutes(unsigned int minutes); 
-        void setSeconds(unsigned int seconds); 
+        void SetSeconds(unsigned int seconds); 
 
         void reset(); 
 
