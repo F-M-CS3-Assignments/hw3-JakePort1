@@ -147,11 +147,17 @@ void Tests1(){
 	forDiv = forDiv / 2; 
 	assert(forDiv.ToString() == "1:2:3");
 
-	forDiv = forDiv / 2; 
-	cout << forDiv.ToString();
+	TimeCode x = TimeCode(999,999,999);
+	TimeCode y = TimeCode(1,1,1);
+	assert(x>y);
+	assert(x>=y);
+	assert(y<x);
+	assert(y<=x);
 
-
-
+	TimeCode j = TimeCode(1,1,1); 
+	assert(j == y); //tests for eqaulity between j and y--which is also 1:1:1
+	
+	assert(j!=x); // j is 1:1:1, x is larger, 
 
 
 

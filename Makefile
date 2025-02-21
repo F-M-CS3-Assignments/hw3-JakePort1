@@ -1,12 +1,7 @@
 comp: 
-	g++ -Wall TimeCode.cpp -o TimeCode
+	g++ -Wall TimeCode.cpp TimeCodeTests.cpp -o tct
 	
 run: 
-	./TimeCode
+	./tct
 
 all: comp run 
-
-test: 
-	g++ -Wall TimeCode.cpp TimeCodeTests.cpp -o tct
-	./tct
-	 

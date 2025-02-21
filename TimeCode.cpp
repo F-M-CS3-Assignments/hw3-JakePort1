@@ -26,27 +26,7 @@ using namespace std;
     //    // what shoudl I put here?
     // }; 
 
-    // set functions 
-    //INSERT OVERFLOW FIX FOR
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // FOR THESE ONES: create a new temp one and set it to be the hours mins and such so that it ocnverst thouse into seconds, the changes the adress to be directed to that new one 
-    //I will also need to implement a get components thigns and replace all the code that I have done so far to make it simplere 
+    // The set functions just reset "t" with the CompoenentsToSeconds function by imputting the changed hour/min/sec 
     void TimeCode::SetHours(unsigned int hours){
         t = ComponentsToSeconds(hours,GetMinutes(),GetSeconds());  
     }; 
@@ -65,45 +45,36 @@ using namespace std;
     }; 
 
     unsigned int TimeCode::GetMinutes() const{
-        // return (  (t-(GetHours()*3600)) / 60   );
-        return ((t/60)%60);
-          // subcract the hours worth of seconds from t, then use integer division to get the minutes 
-    };
+        return ((t/60)%60); //divides by hours and mods to find left over mis 
+            };
 
     unsigned int TimeCode::GetSeconds() const{
         return t % 60; // whatever is left after subtracting out the seconds of the hours and minutes
     };
 
-    // long long unsigned int TimeCode::GetTimeCodeAsSeconds() const{
-    //     return t; 
-    // }
-
     //Acessing time in differnt ways:
-        
     long long unsigned int TimeCode::ComponentsToSeconds(unsigned int hr, unsigned int min, unsigned int sec){
         return sec + (60 * min) + (3600 * hr); //just adds everythning together 
     };
 
     void TimeCode::GetComponents(unsigned int& hr, unsigned int& min, unsigned int& sec) const {
-        // sets the adress to the inputted vars to be the proper nums
+        // sets the adress to the inputted vars to be the proper nums; essentiall a heler function
         hr = GetHours();
         min = GetMinutes();
         sec = GetSeconds();
         } 
    
-
     string TimeCode::ToString() const{
         return to_string(GetHours()) + ":" + to_string(GetMinutes()) + ":" + to_string(GetSeconds()); //converst numbers to a string
         }; 
 
     //dealing with the operators now: 
-
     TimeCode TimeCode::operator+(const TimeCode& other) const{ 
         unsigned int total_seconds = TimeCode::ComponentsToSeconds(other.GetHours(),other.GetMinutes(),other.GetSeconds());
         total_seconds += this->GetTimeCodeAsSeconds();
 
-        //CANNOT use GetComponents for this because I only have the raw time (t) of the answer, its not yet in object form. 
-        unsigned int hours = total_seconds / 3600; 
+        //CANNOT use GetComponents for this because I only have the raw time (t) of the answer, its not yet in object form; applies to other operators as well
+        unsigned int hours = total_seconds / 3600;  
         unsigned int mins = ((total_seconds /60) % 60);
         unsigned int secs = total_seconds % 60;
 
@@ -142,7 +113,7 @@ using namespace std;
         return TimeCode(hours,mins,secs);
         }
    
-
+    //defines conditions for ==, !=, >, >=, <, <= 
     bool TimeCode::operator==(const TimeCode& other) const{
         if(this->GetTimeCodeAsSeconds() == other.GetTimeCodeAsSeconds()){
             return true; 
@@ -178,40 +149,3 @@ using namespace std;
             return true; 
         }else {return false;}
      }; 
-
-// had to remvoe 
-// int main(){
-
-
-//     // TimeCode time; 
-//     // time = TimeCode(12,35,30);
-//     // TimeCode temp = TimeCode(1,1,1);
-    
-//     // TimeCode x = time.operator+(temp);
-//     // TimeCode x = time - temp;
-//     // TimeCode x = temp - time; 
-
-//     TimeCode time = TimeCode(2,4,2); 
-//     TimeCode temp = TimeCode(999999,1,1);
-//     TimeCode x = time /2;
-
-//     // cout << time.ToString() << endl << endl;
-//     // cout << x.ToString();
-//     // cout<< true; 
-
-//     // if(time > temp){
-//     //     cout << "time is bigger";
-//     // }else if(temp > time){
-//     //     cout << "temp is bigger";
-//     // }
-
-//     TimeCode TC = TimeCode(0,0,61);
-//     cout << TC.ToString() << endl;
-//     TC.SetSeconds(62);
-//     cout << TC.ToString() << endl;
-
-//     return 0; 
-// }
-
-
-
