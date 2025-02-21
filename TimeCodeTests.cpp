@@ -118,15 +118,68 @@ void TestSetMinutes()
 }
 
 
+void Tests1(){
+
+	//tests overflow
+	TimeCode t1 = TimeCode(0,0,61);
+	assert(t1.ToString() == "0:1:1");
+
+	//tests mins overflow 
+	TimeCode t2 = TimeCode(0,61,1);
+	assert(t2.ToString() == "1:1:1");
+
+	// tests adding properties: 
+	TimeCode add1 = TimeCode(2,59,0);
+	TimeCode add2 =  TimeCode(0,1,0);
+	TimeCode t3 = add1 + add2; 	
+	assert(t3.ToString() == "3:0:0");
+
+	// tests substraction with the same timecode objects from before:
+	TimeCode t4 = add1 - add2; 
+	assert(t4.ToString()=="2:58:0");
+
+	//Tests division and multiplication: 
+	TimeCode forMult = TimeCode(1,2,3); 
+	forMult = forMult * 2; 
+	assert(forMult.ToString() == "2:4:6");
+
+	TimeCode forDiv = TimeCode(2,4,6); 
+	forDiv = forDiv / 2; 
+	assert(forDiv.ToString() == "1:2:3");
+
+	forDiv = forDiv / 2; 
+	cout << forDiv.ToString();
+
+
+
+
+
+
+
+}
+
 // Many More Tests...
 
 	
 int main(){
 	
+
+	cout << "Starting initial tests: " << endl;
 	TestComponentsToSeconds();
 	TestDefaultConstructor();
 	TestComponentConstructor();
 	TestGetComponents();
+	cout << "All initial tests passed!  " << endl << endl; 
+	cout << "Starting new tests: " << endl; 
+
+	Tests1();
+
+
+
+
+
+
+
 	// Many othere test functions...
 	
 	cout << "PASSED ALL TESTS!!!" << endl;
