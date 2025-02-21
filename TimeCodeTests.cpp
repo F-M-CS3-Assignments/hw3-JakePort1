@@ -167,6 +167,14 @@ void Tests1(){
 	assert(I == 99); 
 	assert(K == 9); 
 	assert(K = 9); 	
+
+	try{
+		TimeCode error = y - x; //should result in a negative number and throw an error: 
+		assert(false);
+	}catch (const std::runtime_error& e){
+		assert(true); // asserts true because the error should have been thrown 
+	}
+	
 }
 	
 int main(){
