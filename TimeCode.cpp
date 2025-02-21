@@ -22,10 +22,6 @@ using namespace std;
         t = tc.t; // copies the t value from the tc adress ans assignes it to the new object
     }; 
 
-    // TimeCode::~TimeCode(){
-    //    // what shoudl I put here?
-    // }; 
-
     // The set functions just reset "t" with the CompoenentsToSeconds function by imputting the changed hour/min/sec 
     void TimeCode::SetHours(unsigned int hours){
         t = ComponentsToSeconds(hours,GetMinutes(),GetSeconds());  
