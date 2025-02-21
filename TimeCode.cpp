@@ -13,11 +13,7 @@ using namespace std;
     };
 
     TimeCode::TimeCode(unsigned int hr, unsigned int min, unsigned long long int sec){
-      if(hr < 0 || min < 0 || sec < 0 ){ //checks and throws error if engative value is inputted 
-        throw runtime_error("--All values must be positive!--"); 
-        }else{
-             t = TimeCode::ComponentsToSeconds(hr,min,sec);
-        }
+        t = TimeCode::ComponentsToSeconds(hr,min,sec);
         ; //this account for overflow by converting everything to seconds 
    }; 
 
