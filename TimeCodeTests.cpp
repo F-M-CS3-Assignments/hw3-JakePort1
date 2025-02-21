@@ -159,16 +159,17 @@ void Tests1(){
 	
 	assert(j!=x); // j is 1:1:1, x is larger, 
 
+	assert(j.GetHours() == 1); 
 
-
-
+	TimeCode t6 = TimeCode(99,9,9); 
+	unsigned int I, J, K; 
+	t6.GetComponents(I,J,K); 
+	assert(I == 99); 
+	assert(K == 9); 
+	assert(K = 9); 	
 }
-
-// Many More Tests...
-
 	
 int main(){
-	
 
 	cout << "Starting initial tests: " << endl;
 	TestComponentsToSeconds();
@@ -180,14 +181,7 @@ int main(){
 
 	Tests1();
 
-
-
-
-
-
-
 	// Many othere test functions...
-	
 	cout << "PASSED ALL TESTS!!!" << endl;
 	return 0;
 }
