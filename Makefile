@@ -7,6 +7,6 @@ run:
 all: comp run 
 
 test: 
-	g++ -Wall -v TimeCode.cpp TimeCodeTests.cpp -o tct
+	g++ -Wall TimeCode.cpp TimeCodeTests.cpp -o tct
 	./tct
 	 
