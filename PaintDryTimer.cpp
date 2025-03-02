@@ -143,6 +143,8 @@ int main(){
 		}
 
 		for(DryingSnapShot *s : batches){
+			
+			delete s->timeToDry;
 			delete s;
 		}
 
