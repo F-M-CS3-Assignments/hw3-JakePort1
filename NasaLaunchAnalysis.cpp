@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream> 
 #include<string> 
+#include<sstream>
 #include "TimeCode.h"
 #include <vector>
 using namespace std; 
@@ -33,10 +34,17 @@ TimeCode parse_line(string){
 
 
 
-vector<string> split(string, char delim){
+vector<string> split(string s, char delim){
+    vector<string> vals;
+    istringstream iSS(s); 
 
-    vector<string> myVec;
-    return myVec;
+    string element;
+    while(getline(iSS,element,delim)){
+        vals.push_back(element);
+    }
+
+
+    return vals;
 }
 
 
@@ -44,7 +52,7 @@ int main(){
 
     //opening file: 
     ifstream IF;
-    IF.open("/Users/jacobport/Desktop/CPS 222/Homeworks /hw3-JakePort1/Space_Corrected_Short.csv");
+    IF.open("Space_Corrected_Short.csv");
 
     // tests if file is open: 
     if(!IF.is_open()){ 
@@ -54,8 +62,30 @@ int main(){
 
     string csvLine; 
     getline(IF, csvLine);
-    cout << csvLine; 
+    vector<string> test = split(csvLine, ',');
+    for(string s : test){
+        cout << s;
+    }
 
+
+
+    //iterates through csv: 
+    while(!IF.eof()){
+        getline(IF,csvLine); //gets next line with every iteration 
+        
+        // split() splits line into a vector of strings based on delimiter ',' 
+
+        //parse_line() sends the 5th index of the above vector made above (fifth index being the time column) and makes it a TimeCode object
+
+        
+    }
+
+
+    //gets average from the vector of TimeCode objects: 
+
+
+
+    
 /*
     Stucture: 
 
