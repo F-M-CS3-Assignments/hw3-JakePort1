@@ -13,7 +13,7 @@ class TimeCode{
 
     public: 
         TimeCode(unsigned int T);
-        TimeCode(unsigned int hr = 0, unsigned int min = 0, unsigned long long int sec = 0); 
+        TimeCode(unsigned int hr, unsigned int min, unsigned long long int sec); 
         TimeCode(const TimeCode& tc); 
         ~TimeCode(){}; 
 

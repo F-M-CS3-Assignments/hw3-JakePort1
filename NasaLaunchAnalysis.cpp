@@ -61,7 +61,7 @@ int main(){
 
     //opening file: 
     ifstream IF;
-    IF.open("Space_Corrected_Short.csv");
+    IF.open("Space_Corrected.csv");
 
     // tests if file is open: 
     if(!IF.is_open()){ 
@@ -90,14 +90,24 @@ int main(){
     }
 
 
-    //gets average from the vector of TimeCode objects: 
+    //gets average from the vector of TimeCode objects. Does this by getting all of the raw t (seconds) values, adding them and average 
+    // number of elements in Times vector. 
+    unsigned int totalSeconds = 0; 
     for(TimeCode t : Times){
-        cout << t.ToString() << endl;
+        totalSeconds += t.GetTimeCodeAsSeconds();
     }
 
+    //averages the time 
+    unsigned int avgTimeAsSeconds = totalSeconds / Times.size(); 
 
+    //Creates TimeCode object that represents the average time: 
+    TimeCode avg = TimeCode(avgTimeAsSeconds); // this uses the one parameter contructor I made for just a time value input 
 
-  
+    cout << Times.size() << " data points." << endl;
+    cout<< "AVERAGE: " << avg.ToString() << endl; 
+    // Outputs 4198 data points and an avergae time of 12:7:56 for "Space_Corrected.csv"
+
+    
 
    
    IF.close();
