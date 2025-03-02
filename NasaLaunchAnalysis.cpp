@@ -1,3 +1,8 @@
+// Jacob Port 
+// CPS 222
+// HW 3 PART 2 
+
+
 #include<iostream>
 #include<fstream> 
 #include<string> 

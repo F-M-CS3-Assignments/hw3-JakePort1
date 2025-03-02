@@ -39,10 +39,11 @@ string drying_snap_shot_to_string(DryingSnapShot dss){
 	// Replace with your code
 	int timeRemaining = get_time_remaining(dss);
 	string SnapShot = ""; 
+	TimeCode tc = TimeCode(get_time_remaining(dss)); 
 	if(timeRemaining > 0){
-		 SnapShot = dss.name + ": Takes " + dss.timeToDry->ToString() + ". Time pase remaining: " + to_string(get_time_remaining(dss));
+		 SnapShot = dss.name + ": Takes " + dss.timeToDry->ToString() + ". Time pase remaining: " + tc.ToString() + ")";
 	}else{
-		 SnapShot = dss.name + ": Takes " + dss.timeToDry->ToString() + ". Time pase remaining: 00:00:00)";
+		 SnapShot = dss.name + ": Takes " + dss.timeToDry->ToString() + ". DONE!" + ")";
 	}
 	return SnapShot;
 }
@@ -50,7 +51,7 @@ string drying_snap_shot_to_string(DryingSnapShot dss){
 
 double get_sphere_sa(double rad){
 	// replace with your code
-	return 4 * 3.14 * (pow(rad,2)); // returns 4 pi r^2, the formula for SA of a sphere 
+	return 4.0 * 3.14 * (pow(rad,2)); // returns 4 pi r^2, the formula for SA of a sphere 
 }
 
 
@@ -120,11 +121,10 @@ int main(){
 		}else if(status == "A" || status == "a"){
 			//gets radius
 			cout << "radius: "; 
-			double radius; string RadAsString; 
+			double radius; 
+			string RadAsString; 
 			cin >> RadAsString; 
-			radius = stoi(RadAsString);
-
-
+			radius = stod(RadAsString);
 
 			//gets time code and 
 			TimeCode TimeToDry = TimeCode(get_sphere_sa(radius));
@@ -133,10 +133,11 @@ int main(){
 			DryingSnapShot *snapshot = new DryingSnapShot; 
 			snapshot->name = "batch name"; 
 			snapshot->startTime = time(0); 
-			snapshot->timeToDry = &TimeToDry; 
+			snapshot->timeToDry = new TimeCode(get_sphere_sa(radius)); 
+
 			batches.push_back(snapshot); // pushes the struct back to the vector 
 
-			cout << "Batch Number: " << "(takes " << TimeToDry.ToString() << " to dry. Time remaining: " <<  TimeToDry.ToString() << endl;
+			cout << "Batch Number: " << "(takes " << TimeToDry.ToString() << " to dry. Time remaining: " <<  TimeToDry.ToString() << ")" << endl;
 
 
 		}else if (status == "v" || status == "V"){
@@ -156,10 +157,6 @@ int main(){
 
 	}
 	
-
-
-
-
 
 
 
