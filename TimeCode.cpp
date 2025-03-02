@@ -6,8 +6,12 @@
 using namespace std; 
 
 #include "TimeCode.h"
+    // contructor for no parameters, made for NASA problem (hw 3 part 2 )
+    TimeCode::TimeCode(){
+        t = 0;
+    }
 
-    // constructor sets time as 0
+    // consturctor for just raw time, made for NASA problem (hw 3 part 2 )
     TimeCode::TimeCode(unsigned int T){ //operator for if I just want to input the raw time in seconds score 
         t = T;
     };

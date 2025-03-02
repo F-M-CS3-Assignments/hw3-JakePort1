@@ -1,7 +1,7 @@
 comp: 
-	g++ -Wall TimeCode.cpp NasaLaunchAnalysis.cpp -o nasa
+	g++ -Wall TimeCode.cpp TimeCodeTests.cpp -o tct
 	
 run: 
-	./nasa
+	./tct
 
 all: comp run 
