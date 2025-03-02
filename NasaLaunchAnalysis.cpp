@@ -36,7 +36,7 @@ TimeCode parse_line(string s){
     //puts the hours and mins spereated by : into variables 
     getline(iSS, hour, ':');
     getline(iSS, min, ':');
-            
+
     return TimeCode(stoi(hour), stoi(min), sec);
 }
 
@@ -72,43 +72,35 @@ int main(){
     string csvLine; 
     getline(IF, csvLine);
 
-    //iterates through csv: 
+    //iterates through csv and creates vector of times objects:
     while(!IF.eof()){
         getline(IF,csvLine); //gets next line with every iteration 
         
         // split() splits line into a vector of strings based on delimiter ','
-         vector<string> row = split(csvLine,',');
-
+         vector<string> row = split(csvLine,' '); // use space as delimiter to make year and time in seperate indexes 
 
         //checks to see if the time value Datum of the above vector has a valid time: 
         for(string element : row){
             //str.find() will return string::npos if it can't find the character. Therefor, this code will parse if it finds an
             // element that has ":" in it 
-            if(element.find(':') != string::npos){
-                //Time.push_back(parse_line(element))
-
+            if(element.find(':') != string::npos){ //avoids rows that have no time value. 
+                Times.push_back(parse_line(element));
             }
-
-
         }
-
-
-
-
     }
 
 
     //gets average from the vector of TimeCode objects: 
+    for(TimeCode t : Times){
+        cout << t.ToString() << endl;
+    }
 
 
 
   
 
-
-
    
    IF.close();
-
 
     return 0;
 }
