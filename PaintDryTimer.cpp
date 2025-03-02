@@ -39,13 +39,13 @@ string drying_snap_shot_to_string(DryingSnapShot dss){
 
 double get_sphere_sa(double rad){
 	// replace with your code
-	return 0;
+	return 4 * 3.14 * (pow(rad,2)); // returns 4 pi r^2, the formula for SA of a sphere 
 }
 
 
 TimeCode *compute_time_code(double surfaceArea){
-	// replace with your code
-	return nullptr;
+	TimeCode *tc = new TimeCode(surfaceArea); //uses raw time in seconds constructor 
+	return tc;
 }
 
 
@@ -83,6 +83,18 @@ void tests(){
 
 int main(){
 	// replace with your code
-	//tests());
+
+	time_t start = time(0); 
+
+
+
+
+
+
+
+
+
+	time_t end = time(0); 
+	time_t duration = (end - start); // gives duration from start to end in seconds.
 	return 0;
 }
