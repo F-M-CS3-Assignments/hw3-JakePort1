@@ -1,4 +1,5 @@
-
+// Jacob Port 
+// Homework 3 part 2 
 
 
 #include <ctime> // for time(0)
@@ -12,8 +13,11 @@
 
 using namespace std;
 
-
-
+//helper function to make the names 
+string BatchNumGenerator(){
+	srand(time(0)); 
+	return "Batch-" + to_string(rand());
+}
 
 struct DryingSnapShot {
 	// This is a struct, it's like an object
@@ -48,12 +52,10 @@ string drying_snap_shot_to_string(DryingSnapShot dss){
 	return SnapShot;
 }
 
-
 double get_sphere_sa(double rad){
 	// replace with your code
 	return 4.0 * 3.14 * (pow(rad,2)); // returns 4 pi r^2, the formula for SA of a sphere 
 }
-
 
 TimeCode *compute_time_code(double surfaceArea){
 	TimeCode *tc = new TimeCode(surfaceArea); //uses raw time in seconds constructor 
@@ -97,22 +99,11 @@ int main(){
 	vector<TimeCode> times; // will save all the time code objects that are made here 
 	vector<DryingSnapShot*> batches; // will track all the batches 
 
-
 	time_t start = time(0); 
-
-	/* 
-	1. get the radius 
-	2. convert to time it will take, 
-	3. get current time, (time(0))
-	4. while cur time != zero, keep the program runniing, such that if the user inputs view or add, it will keep the program goign 
-	5. figure out how the batch Id thing works;
-	
-	*/
 
 	cout << "Choose an option: (A)dd, (V)iew Current Items, (Q)uit: a" << endl;
 	bool quit = false; 
 	string status; 
-
 
 	while(true){
 		cin >> status; 
@@ -131,14 +122,13 @@ int main(){
 
 			// creates the DryignSnapshot Struct 
 			DryingSnapShot *snapshot = new DryingSnapShot; 
-			snapshot->name = "batch name"; 
+			snapshot->name = BatchNumGenerator();
 			snapshot->startTime = time(0); 
 			snapshot->timeToDry = new TimeCode(get_sphere_sa(radius)); 
 
 			batches.push_back(snapshot); // pushes the struct back to the vector 
 
-			cout << "Batch Number: " << "(takes " << TimeToDry.ToString() << " to dry. Time remaining: " <<  TimeToDry.ToString() << ")" << endl;
-
+			cout << snapshot->name << "(takes " << TimeToDry.ToString() << " to dry. Time remaining: " <<  TimeToDry.ToString() << ")" << endl;
 
 		}else if (status == "v" || status == "V"){
 			for(DryingSnapShot* s : batches){
@@ -147,22 +137,16 @@ int main(){
 			}
 			cout << "there are " << batches.size() << " being tracked. " << endl;
 
-
 		}else{
 			cout << "Please choose a valid option: (A)dd, (V)iew Current Items, (Q)uit:" << endl;
 			continue; 
 		}
 
-
+		for(DryingSnapShot *s : batches){
+			delete s;
+		}
 
 	}
-	
 
-
-
-
-	time_t end = time(0); 
-
-	time_t duration = (end - start); // gives duration from start to end in seconds.
 	return 0;
 }
