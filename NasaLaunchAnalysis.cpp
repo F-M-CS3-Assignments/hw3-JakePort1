@@ -26,10 +26,18 @@ using namespace std;
 */
 
 
-TimeCode parse_line(string){
+TimeCode parse_line(string s){
     TimeCode x =  TimeCode(0,0,0);
+    string hour; 
+    string min; 
+    unsigned int sec = 0;  // times don't include seconds so can assume they're 0.
 
-    return x; //for testing 
+    istringstream iSS(s);
+    //puts the hours and mins spereated by : into variables 
+    getline(iSS, hour, ':');
+    getline(iSS, min, ':');
+            
+    return TimeCode(stoi(hour), stoi(min), sec);
 }
 
 
@@ -49,6 +57,7 @@ vector<string> split(string s, char delim){
 
 
 int main(){
+    vector<TimeCode> Times; 
 
     //opening file: 
     ifstream IF;
@@ -62,22 +71,30 @@ int main(){
 
     string csvLine; 
     getline(IF, csvLine);
-    vector<string> test = split(csvLine, ',');
-    for(string s : test){
-        cout << s;
-    }
-
-
 
     //iterates through csv: 
     while(!IF.eof()){
         getline(IF,csvLine); //gets next line with every iteration 
         
-        // split() splits line into a vector of strings based on delimiter ',' 
+        // split() splits line into a vector of strings based on delimiter ','
+         vector<string> row = split(csvLine,',');
 
-        //parse_line() sends the 5th index of the above vector made above (fifth index being the time column) and makes it a TimeCode object
 
-        
+        //checks to see if the time value Datum of the above vector has a valid time: 
+        for(string element : row){
+            //str.find() will return string::npos if it can't find the character. Therefor, this code will parse if it finds an
+            // element that has ":" in it 
+            if(element.find(':') != string::npos){
+                //Time.push_back(parse_line(element))
+
+            }
+
+
+        }
+
+
+
+
     }
 
 
@@ -85,21 +102,7 @@ int main(){
 
 
 
-    
-/*
-    Stucture: 
-
-    Iteratre through lines of csv: 
-        send to split, 
-            if index 5 is not empty (""), send to parse_line to get a time code object, 
-            send that time code object to list of vectors, 
-
-    Take the list of vectors, and get their average time, lots of ways to do this. 
-
-*/
-
-
-
+  
 
 
 
