@@ -11,26 +11,6 @@
 #include <vector>
 using namespace std; 
 
-
-
-
-
-
-/* 
-    extract time values from ccvs, under datum header in format: 
-          Fri Aug 07, 2020 05:12 UTC
-    could do somehting like, if ':' in string, thne use that string, 
-
-
-    then, make an average of all these times, coudl do this by averaging the raw time, or something similar, 
-
-
-    I will also need to make a vector of all the times as objects, this will probably have to be some sort of dynamic thing 
-
-
-*/
-
-
 TimeCode parse_line(string s){
     TimeCode x =  TimeCode(0,0,0);
     string hour; 
@@ -45,8 +25,6 @@ TimeCode parse_line(string s){
     return TimeCode(stoi(hour), stoi(min), sec);
 }
 
-
-
 vector<string> split(string s, char delim){
     vector<string> vals;
     istringstream iSS(s); 
@@ -59,7 +37,6 @@ vector<string> split(string s, char delim){
 
     return vals;
 }
-
 
 int main(){
     vector<TimeCode> Times; 
@@ -94,7 +71,6 @@ int main(){
         }
     }
 
-
     //gets average from the vector of TimeCode objects. Does this by getting all of the raw t (seconds) values, adding them and average 
     // number of elements in Times vector. 
     unsigned int totalSeconds = 0; 
@@ -112,8 +88,6 @@ int main(){
     cout<< "AVERAGE: " << avg.ToString() << endl; 
     // Outputs 4198 data points and an avergae time of 12:7:56 for "Space_Corrected.csv"
 
-    
-   
    IF.close();
 
     return 0;

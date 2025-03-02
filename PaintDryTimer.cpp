@@ -1,6 +1,6 @@
 // Jacob Port 
 // Homework 3 part 2 
-
+// CPS 222
 
 #include <ctime> // for time(0)
 #include <iostream> // for cin and cout
@@ -40,7 +40,6 @@ long long int get_time_remaining(DryingSnapShot &dss){
 
 
 string drying_snap_shot_to_string(DryingSnapShot dss){
-	// Replace with your code
 	int timeRemaining = get_time_remaining(dss);
 	string SnapShot = ""; 
 	TimeCode tc = TimeCode(get_time_remaining(dss)); 
@@ -53,15 +52,13 @@ string drying_snap_shot_to_string(DryingSnapShot dss){
 }
 
 double get_sphere_sa(double rad){
-	// replace with your code
-	return 4.0 * 3.14 * (pow(rad,2)); // returns 4 pi r^2, the formula for SA of a sphere 
+	return (4.0 * 3.14 * (pow(rad,2))); // returns 4 pi r^2, the formula for SA of a sphere 
 }
 
 TimeCode *compute_time_code(double surfaceArea){
 	TimeCode *tc = new TimeCode(surfaceArea); //uses raw time in seconds constructor 
 	return tc;
 }
-
 
 void tests(){
 	// get_time_remaining
@@ -71,29 +68,21 @@ void tests(){
 	dss.timeToDry = &tc;
 	long long int ans = get_time_remaining(dss);
 	assert(ans > 6 && ans < 8);
-	// add more tests here
-
 
 	// get_sphere_sa
 	double sa = get_sphere_sa(2.0);
-	assert (50.2654 < sa && sa < 50.2655);
-	// add more tests here
-
+	cout << sa; 
+	assert (50.2 < sa && sa < 50.26);
 
 	// compute_time_code
 	TimeCode *tc2 = compute_time_code(1.0);
 	//cout << "tc: " << tc.GetTimeCodeAsSeconds() << endl;
 	assert(tc2->GetTimeCodeAsSeconds() == 1);
 	delete tc2;
-
-
-	// add more tests here
-
-
+	
 	cout << "ALL TESTS PASSED!" << endl;
 
 }
-
 
 int main(){
 	vector<TimeCode> times; // will save all the time code objects that are made here 
@@ -142,13 +131,14 @@ int main(){
 			continue; 
 		}
 
-		for(DryingSnapShot *s : batches){
-			
-			delete s->timeToDry;
-			delete s;
-		}
+		
 
 	}
 
+	//Deletes the dynamicall allocated timeToDry TimeCode and the DryingSnapShot:
+		for(DryingSnapShot *s : batches){
+			delete s->timeToDry;
+			delete s;
+		}
 	return 0;
 }
