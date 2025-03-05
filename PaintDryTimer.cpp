@@ -118,13 +118,14 @@ int main(){
 			batches.push_back(snapshot); // pushes the struct back to the vector 
 
 			cout << snapshot->name << "(takes " << TimeToDry.ToString() << " to dry. Time remaining: " <<  TimeToDry.ToString() << ")" << endl;
-
+			cout << "Choose an option: (A)dd, (V)iew Current Items, (Q)uit: a" << endl;
 		}else if (status == "v" || status == "V"){
 			for(DryingSnapShot* s : batches){
 				double timeRemaining = get_time_remaining(*s);
 				cout << drying_snap_shot_to_string(*s) << endl;
 			}
 			cout << "there are " << batches.size() << " being tracked. " << endl;
+			cout << "Choose an option: (A)dd, (V)iew Current Items, (Q)uit: a" << endl;
 
 		}else{
 			cout << "Please choose a valid option: (A)dd, (V)iew Current Items, (Q)uit:" << endl;
